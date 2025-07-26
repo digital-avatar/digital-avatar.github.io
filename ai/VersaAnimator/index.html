@@ -1,1 +1,150 @@
 
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>LokiTalk: Learning Fine-Grained and Generalizable Correspondences to Enhance NeRF-based Talking Head Synthesis</title>
+        <link rel="stylesheet" href="static/css/bulma.min.css">
+        <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+        <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+        <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="./asserts/style.css" rel="stylesheet">
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    </head>
+
+    <body>
+
+        <div class="content">
+            <h1><strong> LokiTalk:<br> Learning Fine-Grained and Generalizable Correspondences to Enhance NeRF-based Talking Head Synthesis </strong></h1>
+
+            <p id="authors" class="serif">
+                <a>Tianqi Li<sup>1</sup></a>,
+                <a>Ruobing Zheng<sup>1†<dag></dag></sup></a>,
+                <a>Bonan Li<sup>2</sup></a>,
+                <a>Zicheng Zhang<sup>2</sup></a>,
+                <br>
+                <a>Meng Wang<sup>1</sup></a>,
+                <a>Jingdong Chen<sup>1</sup></a>,
+                <a>Ming Yang<sup>1</sup></a> <br>
+
+                <span style="font-size: 18px; margin-top: 0.8em">
+                    <br>
+                    <sup>†</sup>Corresponding Author.
+                    <br>
+                    <sup>1</sup>Ant Group. <sup>2</sup>University of Chinese Academy of Sciences.
+                    <br>
+                </span>
+            </p>
+
+            
+            <div class="column-flex">
+                <div class="flex flex-gap" style="margin-bottom:0.5em;">
+                    <a target="_blank" href="https://arxiv.org/abs/2411.19525" ><button><i class="ai ai-arxiv"></i> Paper</button></a>
+                    <a target="_blank" href=""><button><i class="fa fa-github"></i> Code (coming soon)</button></a>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row" style="border: 1px solid #a3a3a3; border-radius: 4px;">
+                <video style="width: 100%; object-fit: cover;" controls poster="asserts/videos/supp-0001.png">
+                    <source src="asserts/videos/supp.mp4" type="video/mp4">
+                </video>
+            </div>
+
+        </div>
+
+        <div class="content">
+            <h2 style="text-align:center"><strong>Abstract</strong></h2>
+
+            <p style="line-height: 30px; font-size: 18px;">
+                Despite significant progress in talking head synthesis since the introduction of Neural Radiance Fields (NeRF), visual artifacts and high training costs persist as major obstacles to large-scale commercial adoption. We propose that identifying and establishing fine-grained and generalizable correspondences between driving signals and generated results can simultaneously resolve both problems. Here we present LokiTalk, a novel framework designed to enhance NeRF-based talking heads with lifelike facial dynamics and improved training efficiency. To achieve fine-grained correspondences, we introduce Region-Specific Deformation Fields, which decompose the overall portrait motion into lip movements, eye blinking, head pose, and torso movements. By hierarchically modeling the driving signals and their associated regions through two cascaded deformation fields, we significantly improve dynamic accuracy and minimize synthetic artifacts. Furthermore, we propose ID-Aware Knowledge Transfer, a plug-and-play module that learns generalizable dynamic and static correspondences from multi-identity videos, while simultaneously extracting ID-specific dynamic and static features to refine the depiction of individual characters. Comprehensive evaluations demonstrate that LokiTalk delivers superior high-fidelity results and training efficiency compared to previous methods. The code will be released upon acceptance.
+            </p>
+
+
+            <h2 style="text-align:center"><strong>Method</strong></h2>
+
+            <h3>Region-Specific Deformation Fields</h3>
+
+            <div id="teasers">
+                <img src="./asserts/rsdf.png", style="width: 100%;">
+                <figcaption></figcaption>
+            </div>
+
+            <p style="line-height: 30px; font-size: 18px">
+                <strong>Figure 1:</strong> The driving signals (audio, pose, eye ratio) participate in the two-stage prediction of face and torso deformation fields, respectively. The mask subsequent to each driving signal represents the cross-attention loss between the driving signal and the corresponding region. A colored cubic grid is used to illustrate the predicted deformation fields, with the internal heat maps indicating the magnitude of the deformation amplitude.
+            </p>
+
+            <h3>ID-Aware Knowledge Transfer</h3>
+
+            <div class="gallery">
+                <div class="row">
+                    
+                    <img src="./asserts/iakt.png", style="width: 50%;">
+
+                    <div style="width: 47%;">
+                        <p style="line-height: 30px; font-size: 18px;">
+                            <strong>Figure 2:</strong> The blue modules are the common correspondences among multiple identities, comprising dynamic (light blue) and static (dark blue) correspondences. The colored modules are dynamic (facial actions) and static information (geometry and appearance) of individual identities. During the pre-training (entire yellow panel), both upper and lower parts are trained simultaneously on multi-ID data, allowing the model to learn universal information while extracting individual information. When fine-tuning, the lower half will continue training based on the id-aware initialization parameters obtained from the ID-Encoder.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- 
+        <div class="content">
+            <h2 style="text-align: center;"><strong>Gallery</strong></h2>
+
+            <h3>Multi-Style Images Driven by Broadcast Audio.</h3>
+            <div class="gallery">
+                <div class="row">
+                    <video style="width: 33%; object-fit: cover;" controls>
+                        <source src="asserts/videos/13.mp4" type="video/mp4">
+                    </video>
+                    <video style="width: 33%; object-fit: cover;" controls>
+                        <source src="asserts/videos/12.mp4" type="video/mp4">
+                    </video>
+                    <video style="width: 33%; object-fit: cover;" controls>
+                        <source src="asserts/videos/11.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <h3>Fine-grained Control:  Gaze, Headpose, Emotion</h3>
+            <div class="row">
+                <video style="width: 100%; object-fit: cover;" controls>
+                <source src="asserts/videos/ctrl_cat.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        -->
+
+        <div class="content">
+            <h2 style="text-align:center; margin: 0 auto;"><strong>BibTex</strong></h2>
+            <div class="bibtex" style="font-size: 15px;">
+            
+                <code>
+                    @article{li2024lokitalk,<br>
+                    &nbsp; title={LokiTalk: Learning Fine-Grained and Generalizable Correspondences to Enhance NeRF-based Talking Head Synthesis},<br>
+                    &nbsp; author={Li, Tianqi and Zheng, Ruobing and Li, Bonan and Zhang, Zicheng and Wang, Meng and Chen, Jingdong and Yang, Ming},<br>
+                    &nbsp; journal={arXiv preprint arXiv:2411.19525},<br>
+                    &nbsp; year={2024}<br>
+                    }
+                </code>
+
+            </div>
+        </div>
+
+        <footer style="text-align: center; font-size: medium; color: blueviolet;">
+            <span id="busuanzi_container_page_pv">Page Views: <span id="busuanzi_value_page_pv"></span></span>
+        </footer>
+
+    </body>
+
+</html>
