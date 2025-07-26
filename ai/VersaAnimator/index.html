@@ -63,34 +63,6 @@
             </p>
 
 
-            <h2 style="text-align:center"><strong>Method</strong></h2>
-
-            <h3>Region-Specific Deformation Fields</h3>
-
-            <div id="teasers">
-                <img src="./asserts/rsdf.png", style="width: 100%;">
-                <figcaption></figcaption>
-            </div>
-
-            <p style="line-height: 30px; font-size: 18px">
-                <strong>Figure 1:</strong> The driving signals (audio, pose, eye ratio) participate in the two-stage prediction of face and torso deformation fields, respectively. The mask subsequent to each driving signal represents the cross-attention loss between the driving signal and the corresponding region. A colored cubic grid is used to illustrate the predicted deformation fields, with the internal heat maps indicating the magnitude of the deformation amplitude.
-            </p>
-
-            <h3>ID-Aware Knowledge Transfer</h3>
-
-            <div class="gallery">
-                <div class="row">
-                    
-                    <img src="./asserts/iakt.png", style="width: 50%;">
-
-                    <div style="width: 47%;">
-                        <p style="line-height: 30px; font-size: 18px;">
-                            <strong>Figure 2:</strong> The blue modules are the common correspondences among multiple identities, comprising dynamic (light blue) and static (dark blue) correspondences. The colored modules are dynamic (facial actions) and static information (geometry and appearance) of individual identities. During the pre-training (entire yellow panel), both upper and lower parts are trained simultaneously on multi-ID data, allowing the model to learn universal information while extracting individual information. When fine-tuning, the lower half will continue training based on the id-aware initialization parameters obtained from the ID-Encoder.
-                        </p>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
 
