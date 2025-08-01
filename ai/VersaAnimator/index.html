@@ -23,8 +23,9 @@
                 <a>Zheng Qin<sup>#</sup><sup>1</sup></a>,
                 <a>Ruobing Zheng<sup>#</sup><sup>*</sup><sup>2</sup></a>,
                 <a>Yabing Wang<sup>1</sup></a>,
-                <a>Zixin Zhu<sup>3</sup></a>,
+                <a>Tianqi Li<sup>2</sup></a>,
                 <br>
+                <a>Zixin Zhu<sup>3</sup></a>,
                 <a>Sanping Zhou<sup>1</sup></a>,
                 <a>Ming Yang<sup>2</sup></a>,
                 <a>Le Wang<sup>†<dag><sup>1</sup></a> <br>
@@ -52,49 +53,53 @@
 
             <br>
 
+            <div id="teasers">
+                <img src="./asserts/1.png", style="width: 100%;">
+                <figcaption></figcaption>
+            </div>
+
+            <br>
+
 
         </div>
 
         <div class="content">
             <h2 style="text-align:center"><strong>Abstract</strong></h2>
 
+            <div id="teasers">
+                <img src="./asserts/2.png", style="width: 100%;">
+                <figcaption></figcaption>
+            </div>
+
             <p style="line-height: 30px; font-size: 18px;">
                 In filmmaking, directors typically allow actors to perform freely based on the script before providing specific guidance on how to present key actions. AI-generated content faces similar requirements, where users not only need automatic generation of lip synchronization and basic gestures from audio input but also desire semantically accurate and expressive body movement that can be ``directly guided'' through text descriptions. Therefore,  we present VersaAnimator, a versatile framework that synthesizes expressive talking human videos from arbitrary portrait images. Specifically, we design a motion generator that produces basic rhythmic movements from audio input and supports text-prompt control for specific actions. The generated whole-body 3D motion tokens can animate portraits of various scales, producing talking heads, half-body gestures and even leg movements for whole-body images. Besides, we introduce a multi-modal controlled video diffusion that generates photorealistic videos, where speech signals govern lip synchronization, facial expressions, and head motions while body movements are guided by the 2D poses. Furthermore, we introduce a token2pose translator to smoothly map 3D motion tokens to 2D pose sequences. This design mitigates the stiffness resulting from direct 3D to 2D conversion and enhances the details of the generated body movements. Extensive experiments shows that VersaAnimator synthesizes lip-synced and identity-preserving videos while generating expressive and semantically meaningful whole-body motions.
             </p>
 
-
-
         </div>
 
 
-        <!-- 
+        
         <div class="content">
             <h2 style="text-align: center;"><strong>Gallery</strong></h2>
 
-            <h3>Multi-Style Images Driven by Broadcast Audio.</h3>
+            <h3>Visual illustration of text control for customizing the character’s motion in the generated video</h3>
             <div class="gallery">
                 <div class="row">
-                    <video style="width: 33%; object-fit: cover;" controls>
-                        <source src="asserts/videos/13.mp4" type="video/mp4">
-                    </video>
-                    <video style="width: 33%; object-fit: cover;" controls>
-                        <source src="asserts/videos/12.mp4" type="video/mp4">
-                    </video>
-                    <video style="width: 33%; object-fit: cover;" controls>
-                        <source src="asserts/videos/11.mp4" type="video/mp4">
-                    </video>
+                    <img src="./asserts/3.png", style="width: 100%;">
                 </div>
             </div>
+            
+            <br>
 
-            <h3>Fine-grained Control:  Gaze, Headpose, Emotion</h3>
-            <div class="row">
-                <video style="width: 100%; object-fit: cover;" controls>
-                <source src="asserts/videos/ctrl_cat.mp4" type="video/mp4">
-                </video>
+            <h3>Results on Multi-Animate with different audio and reference images ranging from head to whole-body.</h3>
+            <div class="gallery">
+                <div class="row">
+                    <img src="./asserts/4.png", style="width: 100%;">
+                </div>
             </div>
         </div>
 
-        -->
+       
 
         <div class="content">
             <h2 style="text-align:center; margin: 0 auto;"><strong>BibTex</strong></h2>
