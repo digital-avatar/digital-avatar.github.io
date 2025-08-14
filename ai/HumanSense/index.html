@@ -36,7 +36,7 @@
                     <br>
                     <sup>†</sup>Corresponding Author.
                     <br>
-                    <sup>1</sup>Xi’an Jiaotong University. <sup>2</sup>Ant Group. <sup>3</sup>University at Buffalo.
+                    <sup>1</sup>Xi’an Jiaotong University. <sup>2</sup>Ant Group.
                     <br>
                 </span>
             </p>
@@ -70,7 +70,10 @@
             </div>
 
             <p style="line-height: 30px; font-size: 18px;">
-                In filmmaking, directors typically allow actors to perform freely based on the script before providing specific guidance on how to present key actions. AI-generated content faces similar requirements, where users not only need automatic generation of lip synchronization and basic gestures from audio input but also desire semantically accurate and expressive body movement that can be ``directly guided'' through text descriptions. Therefore,  we present VersaAnimator, a versatile framework that synthesizes expressive talking human videos from arbitrary portrait images. Specifically, we design a motion generator that produces basic rhythmic movements from audio input and supports text-prompt control for specific actions. The generated whole-body 3D motion tokens can animate portraits of various scales, producing talking heads, half-body gestures and even leg movements for whole-body images. Besides, we introduce a multi-modal controlled video diffusion that generates photorealistic videos, where speech signals govern lip synchronization, facial expressions, and head motions while body movements are guided by the 2D poses. Furthermore, we introduce a token2pose translator to smoothly map 3D motion tokens to 2D pose sequences. This design mitigates the stiffness resulting from direct 3D to 2D conversion and enhances the details of the generated body movements. Extensive experiments shows that VersaAnimator synthesizes lip-synced and identity-preserving videos while generating expressive and semantically meaningful whole-body motions.
+            While Multimodal Large Language Models (MLLMs) show immense promise for achieving truly human-like interactions, progress is hindered by the lack of fine-grained evaluation frameworks for human-centered scenarios, encompassing both the understanding of complex human intentions and the provision of empathetic, context-aware responses. 
+            Here we introduce HumanSense, a comprehensive benchmark designed to evaluate the human-centered perception and interaction capabilities of MLLMs, with a particular focus on deep understanding of extended multimodal contexts and the formulation of rational feedback. 
+            Our evaluation reveals that leading MLLMs still have considerable room for improvement, particularly for advanced interaction-oriented tasks. Supplementing visual input with audio and text information yields substantial improvements, and Omni-modal models show advantages on these tasks.
+            Furthermore, we argue that appropriate feedback stems from a contextual analysis of the interlocutor's needs and emotions, with reasoning ability serving as the key to unlocking it. Accordingly, we employ a multi-stage, modality-progressive reinforcement learning to enhance the reasoning abilities of an Omni model, achieving substantial gains on evaluation results. Additionally, we observe that successful reasoning processes exhibit highly consistent thought patterns. By designing corresponding prompts, we also enhance the performance of non-reasoning models in a training-free manner.     
             </p>
 
         </div>
