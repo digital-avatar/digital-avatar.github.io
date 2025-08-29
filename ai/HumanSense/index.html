@@ -12,12 +12,67 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="./asserts/style.css" rel="stylesheet">
 
+        <!-- 导航栏相关CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        
         <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     </head>
 
     
 
     <body>
+
+        <!-- 导航栏代码 -->
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            More Related Research
+                        </a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/Ditto/" target="_blank">
+                                Ditto-Talkinghead
+                            </a>
+                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/LokiTalk/" target="_blank">
+                                LokiTalk
+                            </a>
+                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/VersaAnimator/" target="_blank">
+                            VersaAnimator
+                            </a>
+                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/HumanSense/" target="_blank">
+                            HumanSense
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- JavaScript 控制汉堡菜单 -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const burger = document.querySelector('.navbar-burger');
+            const menu = document.querySelector('.navbar-menu');
+
+            if (burger && menu) {
+                burger.addEventListener('click', () => {
+                burger.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+                });
+            }
+            });
+        </script>
 
         <div class="content">
 
