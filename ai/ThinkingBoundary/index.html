@@ -1,0 +1,327 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>The Thinking Boundary: Quantifying Reasoning Suitability of Multimodal Tasks via Dual Tuning</title>
+        <!-- <link rel="stylesheet" href="static/css/bulma.min.css">
+        <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+        <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+        <link rel="stylesheet" href="static/css/fontawesome.all.min.css"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="./asserts/style.css" rel="stylesheet">
+
+        <!-- 导航栏相关CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async 
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+        </script>
+
+    </head>
+
+    <body>
+
+        <!-- 导航栏代码 -->
+        <div id="nav-placeholder"></div>
+        <!-- 加载 nav.html -->
+        <script>
+            fetch('../nav.html')  // 假设 nav.html 在根目录下
+            .then(response => response.text())
+            .then(data => {
+                const temp = document.createElement('div');
+                temp.innerHTML = data;
+
+                // 插入 HTML
+                document.getElementById('nav-placeholder').innerHTML = temp.innerHTML;
+
+                // 执行 JS
+                Array.from(temp.querySelectorAll("script")).forEach(script => {
+                const newScript = document.createElement("script");
+                newScript.text = script.text;
+                document.body.appendChild(newScript);
+                });
+            });
+        </script>
+
+
+        <div class="content">
+            <h1><strong> The Thinking Boundary: Quantifying Reasoning Suitability of Multimodal Tasks via Dual Tuning </strong></h1>
+
+            <p id="authors" class="serif">
+                <a>Ruobing Zheng<sup>*<dag></dag></sup></a>,
+                <a>Tianqi Li<sup>*<dag></dag></sup></a>,
+                <a>Jianing Li<sup></sup></a>,
+                <a>Qingpei Guo<sup></sup></a>,
+                <a>Yi Yuan<sup></sup></a>,
+                <a>Jingdong Chen<sup></sup></a>
+                <br>
+                <span style="font-size: 18px; margin-top: 0.8em">
+                    <sup>*</sup>Equal Contribution.
+                </span>
+                <br>
+                <span style="font-size: 18px; margin-top: 0.8em">
+                    Ant Group.
+                </span>
+                <br>
+                <span style="font-size: 18px; margin-top: 0.8em">
+                    <a href="mailto:zhengruobing.zrb@antgroup.com">zhengruobing.zrb@antgroup.com</a>,
+                    <a href="mailto:shijian.ltq@antgroup.com">shijian.ltq@antgroup.com</a>
+                </span>
+                
+            </p>
+            
+            <div class="column-flex">
+                <div class="flex flex-gap" style="margin-bottom:0.5em;">
+                    <!-- <a target="_blank" href="https://arxiv.org/abs/2411.19509" ><button><i class="ai ai-arxiv"></i> Paper</button></a> -->
+                    <!-- <a target="_blank" href="https://github.com/antgroup/ditto-talkinghead"><button><i class="fa fa-github"></i> Code</button></a> -->
+                    <a target="_blank" href="" ><button><i class="ai ai-arxiv"></i> Paper</button></a>
+                    <a target="_blank" href=""><button><i class="fa fa-github"></i> Code (coming soon)</button></a>
+                </div>
+            </div>
+
+            <!-- <br> -->
+
+            <!-- <div id="teasers">
+                <img src="./asserts/fig/scatter_plot_final_manual.png", style="width: 100%;">
+                <figcaption></figcaption>
+            </div> -->
+
+        </div>
+
+        <div class="content">
+            <h2 style="text-align:center"><strong>Abstract</strong></h2>
+
+            <!-- <div id="teasers">
+                <img src="./asserts/fig/scatter_plot_final_manual.png", style="width: 100%;">
+                <figcaption></figcaption>
+            </div> -->
+
+            <p style="line-height: 30px;">
+                While reasoning-enhanced Large Language Models (LLMs) have demonstrated remarkable advances in complex tasks such as mathematics and coding, their effectiveness across universal multimodal scenarios remains uncertain. The trend of releasing parallel "Instruct" and "Thinking" models by leading developers serves merely as a resource-intensive workaround, stemming from the lack of a criterion for determining when reasoning is truly beneficial. In this paper, we propose Dual Tuning, a framework designed to assess whether reasoning yields positive gains for target tasks under given base models and datasets. By jointly fine-tuning on paired Chain-of-Thought (CoT) and Direct-Answer (DA) data under controlled prompts, we systematically quantify and compare the gains of both training modes using the proposed metrics, and establish the "Thinking Boundary" to evaluate the suitability of reasoning training across diverse multimodal tasks, including spatial, mathematical, and multi-disciplinary domains. We further explore the impact of reinforcement training and thinking patterns on reasoning suitability, and validate whether the "Thinking Boundary" can guide data refinement. Our findings challenge the "reasoning-for-all" paradigm, providing practical guidance for identifying appropriate data and training strategies, and motivating the development of resource-efficient, adaptive auto-think systems.
+            </p>
+        </div>
+        <div class="content">
+
+            <!-- <h2 style="text-align: center;"><strong>Gallery</strong></h2> -->
+
+            <h3>Preliminaries</h3>
+            <div class="gallery">
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 1:</strong> Results of preliminary experiments on spatial reasoning. <strong>Baseline</strong>: Qwen2.5-VL-7B. <strong>I</strong>: Image Spatial Data. <strong>V</strong>: Video Spatial Data. <strong>S</strong>: Direct-Answer. <strong>L</strong>: CoT.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab1.png", style="width: 50%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 2:</strong> Results of preliminary experiments on disciplinary reasoning. <strong>Baseline</strong>: Qwen2.5-VL-7B. <strong>O</strong>: Onethinker Image Data. <strong>S</strong>: Direct-Answer. <strong>L</strong>: CoT.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab2.png", style="width: 50%; margin: 0 auto;">                    
+                </div>
+            </div>
+
+            <h3>Probing the Thinking Boundary via Dual Tuning</h3>
+            <div class="gallery">
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 3:</strong> Experimental results on spatial tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab3.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 4:</strong> Experimental results on MathVista tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab4.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+
+                <br>
+
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 5:</strong> Experimental results on MMMU tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab5.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/gap_B.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 1:</strong> The base model shows discrepancies in initial performance between CoT and DA inference across various tasks. Positive values indicate that CoT inference has an advantage.
+                    </p>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/scatter_plot_final_manual.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 2:</strong> We plot each task's \( \mathbf{Gain_{CoT}} \) and \( \mathbf{Gain_{DA}} \) in a two-dimensional coordinate map. Through three distinct regions, we categorize the suitability of different tasks for the two training modes.
+                    </p>
+                </div>
+            </div>
+
+            <h3>Further Exploration</h3>
+            <div class="gallery">
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 6:</strong> Performance Comparison Following Subsequent RL Training on Dual-Tuned Models for Spatial Tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab6.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 7:</strong> Performance Comparison Following Subsequent RL Training on Dual-Tuned Models for MathVista Tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab7.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/scatter_comp.png", style="width: 50%; margin: 0 auto;">
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 3:</strong> We evaluated on two different datasets, marked by circles (original) and triangles (new) on MMMU. The resulting change in task distribution highlights how Thinking Patterns dictate reasoning suitability across different tasks.
+                    </p>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/gain_token.png", style="width: 50%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 4:</strong> The effectiveness of a thinking pattern depends on its refinement and the exclusion of redundant or invalid reasoning. We compare the \( \mathbf{Gain_{token}} \) for both datasets on MathVista tasks.
+                    </p>
+                </div>
+            </div>
+
+
+
+            <h3>Appendix</h3>
+            <div class="gallery">
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 8: Ming-lite-omni</strong> experimental results on spatial tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab8.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 9: Ming-lite-omni</strong> experimental results on MathVista tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab9.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Table 10: Ming-lite-omni</strong> experimental results on MMMU tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
+                    </p>
+                </div>
+                <div class="row">
+                    <img src="./asserts/fig/tab10.png", style="width: 100%; margin: 0 auto;">
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/scatter_plot_S.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 5:</strong> We partition tasks into two halves using \( \mathbf{Gain_{DA}} \) from Figure 2 and conduct two separate DA training on the data belonging to each half. The results show that left-side tasks predominantly show negative gains and right-side positive tasks mostly achieve positive gains after standalone training, which confirms the efficacy of the corresponding data.
+                    </p>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/scatter_plot_L.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 6:</strong> We partition tasks into two halves using \( \mathbf{Gain_{CoT}} \) from Figure 2 and conduct two separate CoT training on the data belonging to each half. The results show that the data corresponding to negative tasks (lower half) indeed yield negative gains during standalone training, and vice versa. These results confirm the efficacy of the corresponding data.
+                    </p>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <img src="./asserts/fig/scatter_plot_SL.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px;">
+                        <strong>Figure 7:</strong> We separately train models with data from the lower-left negative region and the remaining three positive regions. For tasks in the lower-left yellow region, training solely on corresponding data predominantly yields negative gains. For the green and pink positive regions, training on the corresponding data reveals exclusively positive gains.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="content">
+            <h2 style="text-align:center; margin: 0 auto;"><strong>BibTex</strong></h2>
+            <div class="bibtex" style="font-size: 15px;">
+                <code style="color:black">
+                    @article{zheng2026dualtuning,<br>
+                    &nbsp; title={The Thinking Boundary: Quantifying Reasoning Suitability of Multimodal Tasks via Dual Tuning},<br>
+                    &nbsp; author={Zheng, Ruobing and Li, Tianqi and Li, Jianing and Guo, Qingpei and Yuan, Yi and Chen, Jingdong},<br>
+                    <!-- &nbsp; journal={arXiv preprint arXiv:2411.19509},<br> -->
+                    &nbsp; year={2026}<br>
+                    }
+                </code>
+            </div>
+        </div>
+
+        <footer style="text-align: center; font-size: medium; color: blueviolet;">
+            <span id="busuanzi_container_page_pv">Page Views: <span id="busuanzi_value_page_pv"></span></span>
+        </footer>
+
+    </body>
+
+</html>
