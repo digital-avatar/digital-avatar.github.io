@@ -20,53 +20,24 @@
     <body>
 
         <!-- 导航栏代码 -->
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <div class="navbar-menu">
-                <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            More Related Research
-                        </a>
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/Ditto/" target="_blank">
-                                Ditto-Talkinghead
-                            </a>
-                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/LokiTalk/" target="_blank">
-                                LokiTalk
-                            </a>
-                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/VersaAnimator/" target="_blank">
-                            VersaAnimator
-                            </a>
-                            <a class="navbar-item" href="https://digital-avatar.github.io/ai/HumanSense/" target="_blank">
-                            HumanSense
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </nav>
-
-        <!-- JavaScript 控制汉堡菜单 -->
+        <div id="nav-placeholder"></div>
+        <!-- 加载 nav.html -->
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const burger = document.querySelector('.navbar-burger');
-            const menu = document.querySelector('.navbar-menu');
+            fetch('../nav.html')  // 假设 nav.html 在根目录下
+            .then(response => response.text())
+            .then(data => {
+                const temp = document.createElement('div');
+                temp.innerHTML = data;
 
-            if (burger && menu) {
-                burger.addEventListener('click', () => {
-                burger.classList.toggle('is-active');
-                menu.classList.toggle('is-active');
+                // 插入 HTML
+                document.getElementById('nav-placeholder').innerHTML = temp.innerHTML;
+
+                // 执行 JS
+                Array.from(temp.querySelectorAll("script")).forEach(script => {
+                const newScript = document.createElement("script");
+                newScript.text = script.text;
+                document.body.appendChild(newScript);
                 });
-            }
             });
         </script>
 
