@@ -107,55 +107,89 @@
 
             <!-- <h2 style="text-align: center;"><strong>Gallery</strong></h2> -->
 
-            <h3>Preliminaries</h3>
+            <!-- <h3>Preliminaries</h3> -->
+            <h3>Validation of the Dual Tuning & Domain-level Comparison</h3>
             <div class="gallery">
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 1:</strong> Results of preliminary experiments on spatial reasoning. <strong>Baseline</strong>: Qwen2.5-VL-7B. <strong>I</strong>: Image Spatial Data. <strong>V</strong>: Video Spatial Data. <strong>S</strong>: Direct-Answer. <strong>L</strong>: CoT.
                     </p>
                 </div>
                 <div class="row">
                     <img src="./asserts/fig/tab1.png", style="width: 50%; margin: 0 auto;">
                 </div>
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">For Spatial Benchmarks, Dual Tuning recovers the optimal results of each single-mode training. CoT training shows lower average scores compared to DA training.</span>
+                    </li>
+                </ul>
 
                 <br>
 
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 2:</strong> Results of preliminary experiments on disciplinary reasoning. <strong>Baseline</strong>: Qwen2.5-VL-7B. <strong>O</strong>: Onethinker Image Data. <strong>S</strong>: Direct-Answer. <strong>L</strong>: CoT.
                     </p>
                 </div>
                 <div class="row">
                     <img src="./asserts/fig/tab2.png", style="width: 50%; margin: 0 auto;">                    
                 </div>
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">For Math and Multi-disciplinary Benchmarks, Dual Tuning recovers the optimal results of each single-mode training. CoT training shows higher average scores compared to DA training.</span>
+                    </li>
+                </ul>
             </div>
 
-            <h3>Probing the Thinking Boundary via Dual Tuning</h3>
+            <!-- <h3>Probing the Thinking Boundary via Dual Tuning</h3> -->
+            <h3>Fine-Grained Task Analysis</h3>
             <div class="gallery">
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 3:</strong> Experimental results on spatial tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
                     </p>
                 </div>
                 <div class="row">
                     <img src="./asserts/fig/tab3.png", style="width: 100%; margin: 0 auto;">
                 </div>
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">Base model: Direct answering outperforms CoT on perception-oriented tasks.</span>
+                    </li>
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">Training gains: Both CoT and DA have positive gains, but CoT gains are substantially lower than DA.</span>
+                    </li>
+                </ul>
 
                 <br>
 
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 4:</strong> Experimental results on MathVista tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
                     </p>
                 </div>
                 <div class="row">
                     <img src="./asserts/fig/tab4.png", style="width: 100%; margin: 0 auto;">                    
                 </div>
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">Base model: Initial capabilities are comparable between reasoning and non-reasoning inference.</span>
+                    </li>
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">Training gains: The majority of fine-grained mathematical tasks show positive Gain from CoT and negative Gain from DA, indicating these tasks benefit more from reasoning training, Numeric Commonsense is the sole exception where CoT underperforms direct answering.</span>
+                    </li>
+                </ul>
 
                 <br>
 
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 5:</strong> Experimental results on MMMU tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
                     </p>
                 </div>
@@ -170,27 +204,24 @@
                     <img src="./asserts/fig/gap_B.png", style="width: 100%; margin: 0 auto;">                    
                 </div>
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Figure 1:</strong> The base model shows discrepancies in initial performance between CoT and DA inference across various tasks. Positive values indicate that CoT inference has an advantage.
                     </p>
                 </div>
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">In the multi-disciplinary domain, the base model exhibits substantial variation in performance across fine-grained tasks, as same as the suitability for reasoning training.</span>
+                    </li>
+                </ul>
 
-                <br>
-
-                <div class="row">
-                    <img src="./asserts/fig/scatter_plot_final_manual.png", style="width: 100%; margin: 0 auto;">                    
-                </div>
-                <div>
-                    <p style="font-size: 16px;">
-                        <strong>Figure 2:</strong> We plot each task's \( \mathbf{Gain_{CoT}} \) and \( \mathbf{Gain_{DA}} \) in a two-dimensional coordinate map. Through three distinct regions, we categorize the suitability of different tasks for the two training modes.
-                    </p>
-                </div>
             </div>
 
             <h3>Further Exploration</h3>
             <div class="gallery">
+                <h4 style="color:#721C24">Can RL Training Reverse the Reasoning Suitability?</h4>
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 6:</strong> Performance Comparison Following Subsequent RL Training on Dual-Tuned Models for Spatial Tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
                     </p>
                 </div>
@@ -201,7 +232,7 @@
                 <br>
 
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Table 7:</strong> Performance Comparison Following Subsequent RL Training on Dual-Tuned Models for MathVista Tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
                     </p>
                 </div>
@@ -209,14 +240,22 @@
                     <img src="./asserts/fig/tab7.png", style="width: 100%; margin: 0 auto;">
                 </div>
 
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">Additional RL training does not alter the conclusions from Dual Tuning.</span>
+                    </li>
+                </ul>
+
                 <br>
 
+                <h4 style="color:#721C24">The Influence of Thinking Patterns</h4>
                 <div class="row">
                     <img src="./asserts/fig/scatter_comp.png", style="width: 50%; margin: 0 auto;">
                 </div>
                 <div>
-                    <p style="font-size: 16px;">
-                        <strong>Figure 3:</strong> We evaluated on two different datasets, marked by circles (original) and triangles (new) on MMMU. The resulting change in task distribution highlights how Thinking Patterns dictate reasoning suitability across different tasks.
+                    <p style="font-size: 16px; font-style: italic;">
+                        <strong>Figure 2:</strong> We evaluated on two different datasets, marked by circles (original) and triangles (new) on MMMU. The resulting change in task distribution highlights how Thinking Patterns dictate reasoning suitability across different tasks.
                     </p>
                 </div>
 
@@ -226,17 +265,23 @@
                     <img src="./asserts/fig/gain_token.png", style="width: 50%; margin: 0 auto;">                    
                 </div>
                 <div>
-                    <p style="font-size: 16px;">
-                        <strong>Figure 4:</strong> The effectiveness of a thinking pattern depends on its refinement and the exclusion of redundant or invalid reasoning. We compare the \( \mathbf{Gain_{token}} \) for both datasets on MathVista tasks.
+                    <p style="font-size: 16px; font-style: italic;">
+                        <strong>Figure 3:</strong> The effectiveness of a thinking pattern depends on its refinement and the exclusion of redundant or invalid reasoning. We compare the \( \mathbf{Gain_{token}} \) for both datasets on MathVista tasks.
                     </p>
                 </div>
-            </div>
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">The thinking patterns embedded in different datasets influence training gains across different tasks and also affect token-level gains.</span>
+                    </li>
+                </ul>
+            <!-- </div> -->
 
 
 
-            <h3>Appendix</h3>
-            <div class="gallery">
-                <div>
+            <!-- <h3>Appendix</h3> -->
+            <!-- <div class="gallery"> -->
+                <!-- <div>
                     <p style="font-size: 16px;">
                         <strong>Table 8: Ming-lite-omni</strong> experimental results on spatial tasks. Values in red and green denote negative and positive results, respectively. A task is identified as suitable for reasoning-oriented training only when both \( \mathbf{Gain_{CoT}} \) and \( \mathbf{GAP_{DT}} \) exhibit concurrent positive values (highlighted in <strong><span style="color: #2CA02C;">green</span></strong>), which constitutes the Thinking Boundary.
                     </p>
@@ -267,14 +312,29 @@
                     <img src="./asserts/fig/tab10.png", style="width: 100%; margin: 0 auto;">
                 </div>
 
+                <br> -->
+
+                <br>
+
+                <h4 style="color:#721C24">Can the Thinking Boundary Guide Data Refinement?</h4>
+
+                <div class="row">
+                    <img src="./asserts/fig/scatter_plot_final_manual.png", style="width: 100%; margin: 0 auto;">                    
+                </div>
+                <div>
+                    <p style="font-size: 16px; font-style: italic;">
+                        <strong>Figure 4:</strong> We plot each task's \( \mathbf{Gain_{CoT}} \) and \( \mathbf{Gain_{DA}} \) in a two-dimensional coordinate map. Through three distinct regions, we categorize the suitability of different tasks for the two training modes.
+                    </p>
+                </div>
+
                 <br>
 
                 <div class="row">
                     <img src="./asserts/fig/scatter_plot_S.png", style="width: 100%; margin: 0 auto;">                    
                 </div>
                 <div>
-                    <p style="font-size: 16px;">
-                        <strong>Figure 5:</strong> We partition tasks into two halves using \( \mathbf{Gain_{DA}} \) from Figure 2 and conduct two separate DA training on the data belonging to each half. The results show that left-side tasks predominantly show negative gains and right-side positive tasks mostly achieve positive gains after standalone training, which confirms the efficacy of the corresponding data.
+                    <p style="font-size: 16px; font-style: italic;">
+                        <strong>Figure 5:</strong> We partition tasks into two halves using \( \mathbf{Gain_{DA}} \) from Figure 4 and conduct two separate DA training on the data belonging to each half. The results show that left-side tasks predominantly show negative gains and right-side positive tasks mostly achieve positive gains after standalone training, which confirms the efficacy of the corresponding data.
                     </p>
                 </div>
 
@@ -284,8 +344,8 @@
                     <img src="./asserts/fig/scatter_plot_L.png", style="width: 100%; margin: 0 auto;">                    
                 </div>
                 <div>
-                    <p style="font-size: 16px;">
-                        <strong>Figure 6:</strong> We partition tasks into two halves using \( \mathbf{Gain_{CoT}} \) from Figure 2 and conduct two separate CoT training on the data belonging to each half. The results show that the data corresponding to negative tasks (lower half) indeed yield negative gains during standalone training, and vice versa. These results confirm the efficacy of the corresponding data.
+                    <p style="font-size: 16px; font-style: italic;">
+                        <strong>Figure 6:</strong> We partition tasks into two halves using \( \mathbf{Gain_{CoT}} \) from Figure 4 and conduct two separate CoT training on the data belonging to each half. The results show that the data corresponding to negative tasks (lower half) indeed yield negative gains during standalone training, and vice versa. These results confirm the efficacy of the corresponding data.
                     </p>
                 </div>
 
@@ -295,10 +355,17 @@
                     <img src="./asserts/fig/scatter_plot_SL.png", style="width: 100%; margin: 0 auto;">                    
                 </div>
                 <div>
-                    <p style="font-size: 16px;">
+                    <p style="font-size: 16px; font-style: italic;">
                         <strong>Figure 7:</strong> We separately train models with data from the lower-left negative region and the remaining three positive regions. For tasks in the lower-left yellow region, training solely on corresponding data predominantly yields negative gains. For the green and pink positive regions, training on the corresponding data reveals exclusively positive gains.
                     </p>
                 </div>
+
+                <ul style="list-style: none; font-size: 16px;">
+                    <li style="position: relative; padding-left: 4px;">
+                        <span style="position: absolute; left: -20px; color: green;">✅</span>
+                        <span style="color: #1E88E5;">This evidence confirms that Dual Tuning results capture the true efficacy of training data, offering actionable guidance for the identification and refinement of data subsets.</span>
+                    </li>
+                </ul>
 
             </div>
 
