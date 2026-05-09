@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>The Thinking Boundary: Quantifying Reasoning Suitability of Multimodal Tasks via Dual Tuning</title>
+        <title>Dual Tuning for Reasoning Efficacy-Driven Data Curation in Multimodal LLM Training</title>
         <!-- <link rel="stylesheet" href="static/css/bulma.min.css">
         <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
         <link rel="stylesheet" href="static/css/bulma-slider.min.css">
@@ -48,7 +48,7 @@
 
 
         <div class="content">
-            <h1><strong> The Thinking Boundary: Quantifying Reasoning Suitability of Multimodal Tasks via Dual Tuning </strong></h1>
+            <h1><strong> Dual Tuning for Reasoning Efficacy-Driven Data Curation in Multimodal LLM Training </strong></h1>
 
             <p id="authors" class="serif">
                 <a>Ruobing Zheng<sup>*<dag></dag></sup></a>,
@@ -100,7 +100,7 @@
             </div> -->
 
             <p style="line-height: 30px;">
-                While reasoning-enhanced Large Language Models (LLMs) have demonstrated remarkable advances in complex tasks such as mathematics and coding, their effectiveness across universal multimodal scenarios remains uncertain. The trend of releasing parallel "Instruct" and "Thinking" models by leading developers serves merely as a resource-intensive workaround, stemming from the lack of a criterion for determining when reasoning is truly beneficial. In this paper, we propose Dual Tuning, a framework designed to assess whether reasoning yields positive gains for target tasks under given base models and datasets. By jointly fine-tuning on paired Chain-of-Thought (CoT) and Direct-Answer (DA) data under controlled prompts, we systematically quantify and compare the gains of both training modes using the proposed metrics, and establish the "Thinking Boundary" to evaluate the suitability of reasoning training across diverse multimodal tasks, including spatial, mathematical, and multi-disciplinary domains. We further explore the impact of reinforcement training and thinking patterns on reasoning suitability, and validate whether the "Thinking Boundary" can guide data refinement. Our findings challenge the "reasoning-for-all" paradigm, providing practical guidance for identifying appropriate data and training strategies, and motivating the development of resource-efficient, adaptive auto-think systems.
+                Reasoning post-training improves Large Language Models (LLMs) on complex tasks such as mathematics and coding, but its benefits across diverse multimodal tasks remains uncertain. The trend of releasing parallel "Instruct" and "Thinking" models by leading teams is both resource-intensive and user-unfriendly. Prior work finds that the gains from reasoning training are influenced by multiple factors, such as base model capabilities, task characteristics, and Chain-of-Thought (CoT) data quality. However, principled criteria for determining when reasoning post-training is beneficial and which data should support it are still lacking. In this paper, we propose Dual Tuning, a reasoning efficacy-driven data curation framework for multimodal LLMs training. Given a target task and a base model, Dual Tuning jointly evaluates whether the training data is beneficial and whether reasoning training with current CoT content yields positive gains over non-reasoning alternatives. We apply Dual Tuning across spatial, mathematical, and multi-disciplinary tasks, and further analyze how reinforcement learning and thinking patterns affect reasoning efficacy. The Dual Tuning results guide data curation by identifying data that benefit reasoning training, data better suited to direct-answer training, and data that are detrimental under both training modes. Our work provides quantitative criteria for selecting appropriate training data and matching post-training strategies.
             </p>
         </div>
         <div class="content">
@@ -376,7 +376,7 @@
             <div class="bibtex" style="font-size: 15px;">
                 <code style="color:black">
                     @article{zheng2026thethinkingboundary,<br>
-                    &nbsp; title={The Thinking Boundary: Quantifying Reasoning Suitability of Multimodal Tasks via Dual Tuning},<br>
+                    &nbsp; title={Dual Tuning for Reasoning Efficacy-Driven Data Curation in Multimodal LLM Training},<br>
                     &nbsp; author={Zheng, Ruobing and Li, Tianqi and Li, Jianing and Guo, Qingpei and Yuan, Yi and Chen, Jingdong},<br>
                     &nbsp; journal={arXiv preprint arXiv:2603.04415},<br>
                     &nbsp; year={2026}<br>
