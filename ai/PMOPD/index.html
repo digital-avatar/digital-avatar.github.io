@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PMOPD: Task Ordering, Cycling, and Parameter-Update Subspace Protection in Multi-Teacher On-Policy Distillation.">
+  <title>PMOPD: Task Ordering, Cycling, and Parameter-Update Subspace Protection in Multi-Teacher On-Policy Distillation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./asserts/style.css">
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch('../nav.html')
+      .then(response => {
+        if (!response.ok) throw new Error('Navigation could not be loaded.');
+        return response.text();
+      })
+      .then(data => {
+        const temp = document.createElement('div');
+        temp.innerHTML = data;
+        document.getElementById('nav-placeholder').innerHTML = temp.innerHTML;
+        Array.from(temp.querySelectorAll('script')).forEach(script => {
+          const newScript = document.createElement('script');
+          newScript.text = script.text;
+          document.body.appendChild(newScript);
+        });
+      })
+      .catch(() => {
+        document.getElementById('nav-placeholder').remove();
+      });
+  </script>
+
+  <main>
+    <section class="content hero-card">
+      <h1 class="paper-title"><strong>PMOPD: Task Ordering, Cycling, and Parameter-Update Subspace Protection in Multi-Teacher On-Policy Distillation</strong></h1>
+
+      <p id="authors" class="serif">
+        <a href="mailto:liuyouzhi22@mails.ucas.ac.cn">Youzhi Liu</a>,
+        <a href="mailto:zrb915@gmail.com">Ruobing Zheng<sup>*</sup></a>,
+        <a>Boyuan Tong</a>,
+        <a>Tianqi Li</a>,<br>
+        <a>Pingqi Li</a>,
+        <a>Hanbo Bi</a>,
+        <a>Yi Yuan</a>,
+        <a>Jingdong Chen</a><br>
+        <span class="affiliation-line">Ant Group</span><br>
+        <span class="corresponding-line"><sup>*</sup>Corresponding author</span>
+      </p>
+
+      <div class="column-flex">
+        <div class="flex flex-gap project-links" style="margin-bottom:0.5em;">
+          <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2609.34605"><button><i class="ai ai-arxiv"></i> Paper</button></a>
+          <a target="_blank" rel="noopener" href="https://github.com/digital-avatar"><button><i class="fa fa-github"></i> GitHub</button></a>
+        </div>
+      </div>
+
+      <div class="figure-block">
+        <img src="./asserts/figure1.png" alt="Task-preferred update directions and optimization trajectories of MOPD and PMOPD.">
+        <p class="figure-caption"><strong>Task-update geometry.</strong> Math, Code, and Reason prefer different update directions at the same checkpoint. PMOPD corrects updates against protected task directions and follows a more stable trajectory toward a shared low-loss region.</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <h2 style="text-align:center"><strong>Abstract</strong></h2>
+      <p>
+        Multi-teacher on-policy distillation (MOPD) integrates specialized capabilities into a single language model, but updates from different teachers can interfere in shared parameters. We find that cumulative updates from different tasks rapidly concentrate in distinct low-dimensional subspaces. Based on this geometry, we propose <strong>PMOPD</strong> (Projection-based Multi-Teacher On-Policy Distillation), which constructs subspace memories from realized task-block displacements and projects both gradients and optimizer updates to remove components that interfere with protected task directions. A lightweight conflict probe guides task ordering, while a cycling strategy balances reliable subspace estimation with timely task revisitation. Across Code, Reason, and Math, PMOPD improves every evaluated capability over MOPD, increasing the three-task average by <strong>2.54 points on Qwen2.5-7B</strong> and <strong>2.09 points on Llama-3.1-8B</strong>.
+      </p>
+
+    </section>
+
+    <section class="content">
+      <h2 style="text-align:center"><strong>Method</strong></h2>
+      <p class="section-lead">Subspace memory construction and projected protection in multi-teacher OPD.</p>
+      <div class="figure-block">
+        <img src="./asserts/method.png" alt="Overview of the PMOPD method across Code, Reason, and Math stages.">
+        <p class="figure-caption"><strong>PMOPD overview.</strong> Within each cycle, completed task blocks are summarized by the dominant singular vectors of their cumulative parameter displacements. The resulting orthogonal memory constrains subsequent task gradients and preconditioned optimizer updates. Memory is rebuilt in every cycle.</p>
+      </div>
+      <p>
+        PMOPD trains the shared student in ordered task blocks. After a task block, it computes the realized parameter displacement between the block's start and end checkpoints and extracts its top singular directions. These directions are orthogonalized into a compact protected memory. During later task blocks, PMOPD removes update components that lie in this memory. The projection is applied twice: first to the raw gradient and then to the preconditioned Adafactor update, because adaptive element-wise scaling can rotate a projected gradient back toward a protected subspace.
+      </p>
+    </section>
+
+    <section class="content">
+      <h2 style="text-align:center"><strong>Task Ordering and Cycling</strong></h2>
+      <p>
+        Task interference is directional, and the final result depends on both the ordering of teachers and how frequently the model revisits each task. PMOPD uses lightweight geometric diagnostics instead of exhaustive full-training searches.
+      </p>
+
+      <div class="figure-block compact">
+        <img src="./asserts/order_conflict.png" alt="Ten-fold estimates of task-level undirected conflict for Code, Reason, and Math.">
+        <p class="figure-caption"><strong>Conflict probe.</strong> Ten estimates based on 60-sample subsets consistently recover the ordering Code &lt; Reason &lt; Math, selecting <strong>Code→Reason→Math</strong> for training.</p>
+      </div>
+
+      <div class="figure-block">
+        <img src="./asserts/cycle_analysis.png" alt="Average score and cross-cycle subspace consistency for different cycle counts.">
+        <p class="figure-caption"><strong>Cycle selection.</strong> Both the average task score and cross-cycle subspace consistency peak at four cycles, balancing reliable block-displacement estimates with timely task revisitation.</p>
+      </div>
+    </section>
+
+    <section class="content">
+      <h2 style="text-align:center"><strong>Main Results</strong></h2>
+      <p>
+        PMOPD improves Math, Reason, and Code simultaneously on two independently developed model families. The gains therefore reflect stronger joint capability integration rather than a transfer of performance from one task to another.
+      </p>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th rowspan="2">Method</th>
+              <th colspan="4">Qwen2.5-7B</th>
+              <th colspan="4">Llama-3.1-8B</th>
+            </tr>
+            <tr>
+              <th>Math</th><th>Reason</th><th>Code</th><th>Avg.</th>
+              <th>Math</th><th>Reason</th><th>Code</th><th>Avg.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>Student Model</th><td>51.78</td><td>50.20</td><td>49.67</td><td>50.55</td><td>11.33</td><td>58.56</td><td>27.33</td><td>32.41</td></tr>
+            <tr><th>Parameter Merge</th><td>61.56</td><td>60.44</td><td>53.67</td><td>58.56</td><td>12.22</td><td>63.64</td><td>30.00</td><td>35.29</td></tr>
+            <tr><th>MOPD</th><td>65.56</td><td>71.74</td><td>56.00</td><td>64.43</td><td>18.22</td><td>68.63</td><td>30.00</td><td>38.95</td></tr>
+            <tr><th>BB-MOPD</th><td>65.33</td><td>70.68</td><td>55.67</td><td>63.89</td><td>15.33</td><td>64.21</td><td>29.33</td><td>36.29</td></tr>
+            <tr><th>Open-MOPD</th><td>66.44</td><td>70.52</td><td>53.67</td><td>63.54</td><td>14.89</td><td>65.52</td><td>25.00</td><td>35.14</td></tr>
+            <tr class="pmopd-row"><th>PMOPD</th><td>67.78</td><td>73.46</td><td>59.67</td><td>66.97</td><td>21.33</td><td>69.45</td><td>32.33</td><td>41.04</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="metric-note">PMOPD improves the average over MOPD by +2.54 points on Qwen2.5-7B and +2.09 points on Llama-3.1-8B.</p>
+    </section>
+
+    <section class="content">
+      <h2 style="text-align:center; margin:0 auto"><strong>BibTeX</strong></h2>
+      <div class="bibtex" style="font-size:15px;">
+        <code style="color:black">@article{liu2026pmopd,<br>
+          &nbsp; title={PMOPD: Task Ordering, Cycling, and Parameter-Update Subspace Protection in Multi-Teacher On-Policy Distillation},<br>
+          &nbsp; author={Liu, Youzhi and Zheng, Ruobing and Tong, Boyuan and Li, Tianqi and Li, Pingqi and Bi, Hanbo and Yuan, Yi and Chen, Jingdong},<br>
+          &nbsp; journal={arXiv preprint arXiv:2609.34605},<br>
+          &nbsp; year={2026}<br>
+        }</code>
+      </div>
+    </section>
+  </main>
+
+  <footer style="text-align:center; font-size:medium; color:blueviolet; padding-bottom:24px;">
+    <span id="busuanzi_container_page_pv">Page Views: <span id="busuanzi_value_page_pv"></span></span>
+  </footer>
+</body>
+</html>
