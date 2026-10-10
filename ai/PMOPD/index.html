@@ -67,7 +67,7 @@
     <section class="content">
       <h2 style="text-align:center"><strong>Abstract</strong></h2>
       <p>
-        Multi-teacher on-policy distillation (MOPD) integrates specialized capabilities into a single language model, but updates from different teachers can interfere in shared parameters. We find that cumulative updates from different tasks rapidly concentrate in distinct low-dimensional subspaces. Based on this geometry, we propose <strong>PMOPD</strong> (Projection-based Multi-Teacher On-Policy Distillation), which constructs subspace memories from realized task-block displacements and projects both gradients and optimizer updates to remove components that interfere with protected task directions. A lightweight conflict probe guides task ordering, while a cycling strategy balances reliable subspace estimation with timely task revisitation. Across Code, Reason, and Math, PMOPD improves every evaluated capability over MOPD, increasing the three-task average by <strong>2.54 points on Qwen2.5-7B</strong> and <strong>2.09 points on Llama-3.1-8B</strong>.
+        Multi-teacher on-policy distillation (MOPD) has emerged as a popular post-training paradigm for integrating specialized capabilities in frontier language models. Existing OPD research has primarily focused on optimizing single-task distillation through objective design, distillation scope, and teacher signal construction, whereas MOPD must aggregate multiple capabilities in shared parameters and address the resulting capability seesaw, in which improving one domain suppresses capabilities acquired from another. Inspired by the distinctive update geometry of OPD, we find that parameter updates from different tasks rapidly concentrate in their respective low-dimensional subspaces during MOPD, providing a direct geometric basis for identifying and controlling cross-task interference. We therefore propose PMOPD (Projection-based Multi-Teacher On-Policy Distillation), which constructs subspace memories from the cumulative parameter displacements of different tasks and projects both gradients and optimizer updates to remove components that interfere with protected task directions. We further develop a lightweight conflict probe to characterize task interactions and guide task ordering, together with a cycling strategy that balances subspace estimation and timely task revisitation. Experiments on representative Code, Reason, and Math tasks show that PMOPD improves every evaluated capability over MOPD, raising the average score across the three tasks by 2.54 points on Qwen2.5-7B and 2.09 points on Llama-3.1-8B. These consistent gains establish geometry-aware optimization as an effective and transferable approach to balanced multi-teacher distillation.
       </p>
 
     </section>
@@ -82,23 +82,6 @@
       <p>
         PMOPD trains the shared student in ordered task blocks. After a task block, it computes the realized parameter displacement between the block's start and end checkpoints and extracts its top singular directions. These directions are orthogonalized into a compact protected memory. During later task blocks, PMOPD removes update components that lie in this memory. The projection is applied twice: first to the raw gradient and then to the preconditioned Adafactor update, because adaptive element-wise scaling can rotate a projected gradient back toward a protected subspace.
       </p>
-    </section>
-
-    <section class="content">
-      <h2 style="text-align:center"><strong>Task Ordering and Cycling</strong></h2>
-      <p>
-        Task interference is directional, and the final result depends on both the ordering of teachers and how frequently the model revisits each task. PMOPD uses lightweight geometric diagnostics instead of exhaustive full-training searches.
-      </p>
-
-      <div class="figure-block compact">
-        <img src="./asserts/order_conflict.png" alt="Ten-fold estimates of task-level undirected conflict for Code, Reason, and Math.">
-        <p class="figure-caption"><strong>Conflict probe.</strong> Ten estimates based on 60-sample subsets consistently recover the ordering Code &lt; Reason &lt; Math, selecting <strong>Code→Reason→Math</strong> for training.</p>
-      </div>
-
-      <div class="figure-block">
-        <img src="./asserts/cycle_analysis.png" alt="Average score and cross-cycle subspace consistency for different cycle counts.">
-        <p class="figure-caption"><strong>Cycle selection.</strong> Both the average task score and cross-cycle subspace consistency peak at four cycles, balancing reliable block-displacement estimates with timely task revisitation.</p>
-      </div>
     </section>
 
     <section class="content">
